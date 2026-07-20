@@ -18,6 +18,10 @@ import { AssetLoader } from '../modules/AssetLoader.js';
 import { EventBus } from '../utils/EventBus.js';
 import { DeviceCapabilities } from '../utils/DeviceCapabilities.js';
 import { Constants } from '../utils/Constants.js';
+import { LayoutSystem } from '../modules/LayoutSystem.js';
+import { NavigationSystem } from '../modules/NavigationSystem.js';
+import { ScrollSystem } from '../modules/ScrollSystem.js';
+
 
 export class App {
   constructor() {
@@ -81,6 +85,32 @@ export class App {
       const uiManager = new UIManager({ eventBus: this.eventBus });
       this.modules.set('ui', uiManager);
       uiManager.init();
+
+            // 5b. Initialize Layout System (Part 2)
+      const layoutSystem = new LayoutSystem({
+        eventBus: this.eventBus,
+        device: this.device,
+      });
+      this.registerModule('layout', layoutSystem);
+      layoutSystem.init();
+
+      // 5c. Initialize Navigation System (Part 2)
+      const navigationSystem = new NavigationSystem({
+        eventBus: this.eventBus,
+        layoutSystem,
+        device: this.device,
+      });
+      this.registerModule('navigation', navigationSystem);
+      navigationSystem.init();
+
+      // 5d. Initialize Scroll System (Part 2)
+      const scrollSystem = new ScrollSystem({
+        eventBus: this.eventBus,
+        layoutSystem,
+      });
+      this.registerModule('scroll', scrollSystem);
+      scrollSystem.init();
+
 
       // 6. Initialize Three.js core (interdependent)
       await this._initThreeJS();
@@ -222,9 +252,11 @@ export class App {
 
     // Dispose modules in reverse order
     const disposeOrder = [
-      'animation', 'resize', 'renderer', 'camera', 
+      'scroll', 'navigation', 'layout', // Part 2 modules first
+      'animation', 'resize', 'renderer', 'camera',
       'scene', 'ui', 'assetLoader', 'loading'
     ];
+
     
     for (const name of disposeOrder) {
       const module = this.modules.get(name);
