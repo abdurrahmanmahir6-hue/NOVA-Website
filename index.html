@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="A cinematic, luxury, futuristic landing experience.">
+  <meta name="theme-color" content="#050505">
+  
+  <title>Aether — Cinematic Experience</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <!-- ============================================
+       LOADING SCREEN
+       ============================================ -->
+  <div id="loading-screen" class="loading-screen" role="status" aria-live="polite" aria-label="Loading experience">
+    <div class="loading-screen__content">
+      <div class="loading-screen__brand">
+        <span class="loading-screen__logo">Aether</span>
+      </div>
+      <div class="loading-screen__progress">
+        <div class="loading-screen__track">
+          <div class="loading-screen__bar" id="loading-bar" aria-hidden="true"></div>
+        </div>
+        <span class="loading-screen__percentage" id="loading-percentage">0%</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============================================
+       NAVIGATION
+       ============================================ -->
+  <header class="site-header" id="site-header">
+    <nav class="site-nav" aria-label="Main navigation">
+      <div class="site-nav__brand">
+        <a href="/" class="site-nav__logo" aria-label="Aether Home">
+          <span class="site-nav__logo-mark">A</span>
+          <span class="site-nav__logo-text">Aether</span>
+        </a>
+      </div>
+      
+      <ul class="site-nav__links" id="site-nav-links" role="menubar">
+        <li role="none"><a href="#vision" class="site-nav__link" role="menuitem">Vision</a></li>
+        <li role="none"><a href="#technology" class="site-nav__link" role="menuitem">Technology</a></li>
+        <li role="none"><a href="#experience" class="site-nav__link" role="menuitem">Experience</a></li>
+        <li role="none"><a href="#about" class="site-nav__link" role="menuitem">About</a></li>
+      </ul>
+      
+      <div class="site-nav__actions">
+        <a href="#contact" class="btn btn--primary btn--sm">Get Started</a>
+      </div>
+      
+      <button 
+        class="site-nav__toggle" 
+        id="nav-toggle" 
+        aria-label="Toggle navigation menu" 
+        aria-expanded="false" 
+        aria-controls="site-nav-links"
+        type="button"
+      >
+        <span class="site-nav__toggle-line" aria-hidden="true"></span>
+        <span class="site-nav__toggle-line" aria-hidden="true"></span>
+        <span class="site-nav__toggle-line" aria-hidden="true"></span>
+      </button>
+    </nav>
+  </header>
+
+  <!-- ============================================
+       MAIN CONTENT
+       ============================================ -->
+  <main class="site-main">
+    
+    <!-- ==========================================
+         HERO SECTION
+         ========================================== -->
+    <section class="hero" id="hero" aria-label="Hero section">
+      <div class="hero__canvas-container" id="hero-canvas-container" aria-hidden="true">
+        <!-- Three.js canvas will be injected here -->
+      </div>
+      
+      <div class="hero__background" aria-hidden="true">
+        <div class="hero__gradient-overlay"></div>
+        <div class="hero__noise-overlay"></div>
+      </div>
+      
+      <div class="hero__content">
+        <div class="hero__eyebrow">
+          <span class="hero__eyebrow-line" aria-hidden="true"></span>
+          <span class="hero__eyebrow-text">The Future is Here</span>
+        </div>
+        
+        <h1 class="hero__title">
+          <span class="hero__title-line">Crafted in</span>
+          <span class="hero__title-line hero__title-line--accent">Light & Motion</span>
+        </h1>
+        
+        <p class="hero__description">
+          A new dimension of digital experience. Where design meets engineering, 
+          and every pixel tells a story of precision and beauty.
+        </p>
+        
+        <div class="hero__actions">
+          <a href="#explore" class="btn btn--primary btn--lg">
+            <span class="btn__text">Explore the Vision</span>
+            <span class="btn__icon" aria-hidden="true">
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M4.167 10h11.666m0 0L10 4.167M15.833 10L10 15.833" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </span>
+          </a>
+          <a href="#learn" class="btn btn--ghost btn--lg">
+            <span class="btn__text">Learn More</span>
+          </a>
+        </div>
+      </div>
+      
+      <div class="hero__scroll-indicator" aria-hidden="true">
+        <div class="hero__scroll-line"></div>
+        <span class="hero__scroll-text">Scroll</span>
+      </div>
+    </section>
+
+    <!-- Placeholder sections for future content -->
+    <section class="section section--placeholder" id="vision" aria-label="Vision section">
+      <div class="section__container">
+        <h2 class="section__title">Vision</h2>
+        <p class="section__text">Content coming in Part 2.</p>
+      </div>
+    </section>
+
+    <section class="section section--placeholder" id="technology" aria-label="Technology section">
+      <div class="section__container">
+        <h2 class="section__title">Technology</h2>
+        <p class="section__text">Content coming in Part 2.</p>
+      </div>
+    </section>
+
+    <section class="section section--placeholder" id="experience" aria-label="Experience section">
+      <div class="section__container">
+        <h2 class="section__title">Experience</h2>
+        <p class="section__text">Content coming in Part 2.</p>
+      </div>
+    </section>
+
+    <section class="section section--placeholder" id="about" aria-label="About section">
+      <div class="section__container">
+        <h2 class="section__title">About</h2>
+        <p class="section__text">Content coming in Part 2.</p>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ============================================
+       FOOTER
+       ============================================ -->
+  <footer class="site-footer" role="contentinfo">
+    <div class="site-footer__container">
+      <div class="site-footer__brand">
+        <span class="site-footer__logo">Aether</span>
+        <p class="site-footer__tagline">Crafted with precision.</p>
+      </div>
+      <p class="site-footer__copyright">&copy; 2026 Aether. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <!-- ============================================
+       SCRIPTS
+       ============================================ -->
+  <script type="importmap">
+  {
+    "imports": {
+      "three": "https://unpkg.com/three@0.165.0/build/three.module.js",
+      "three/addons/": "https://unpkg.com/three@0.165.0/examples/jsm/"
+    }
+  }
+  </script>
+  <script type="module" src="js/main.js"></script>
+</body>
+</html>
