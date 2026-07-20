@@ -37,6 +37,14 @@ export const Constants = Object.freeze({
     HOVER_START: 'interaction:hoverstart',
     HOVER_END: 'interaction:hoverend',
     SCROLL_PROGRESS: 'scroll:progress',
+        // ── Part 2: Layout & Navigation ──────────
+    LAYOUT_READY: 'layout:ready',
+    BREAKPOINT_CHANGE: 'layout:breakpointchange',
+    SECTION_CHANGE: 'layout:sectionchange',
+    SECTION_ENTER: 'layout:sectionenter',
+    SECTION_LEAVE: 'layout:sectionleave',
+    ELEMENT_REVEAL: 'layout:elementreveal',
+    PARALLAX_UPDATE: 'layout:parallaxupdate',
   }),
 
   // ── CSS Selectors ──────────────────────────
