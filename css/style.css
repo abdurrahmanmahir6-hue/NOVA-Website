@@ -1384,3 +1384,83 @@ html {
   }
 }
 
+/* ============================================
+   34. FEATURE CARDS
+   ============================================ */
+.feature-card {
+  composes: glass;
+  padding: var(--space-8);
+  border-radius: var(--radius-lg);
+  transition: transform var(--transition-base), border-color var(--transition-base);
+}
+
+.feature-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--glass-border-hover);
+}
+
+.feature-card__title {
+  font-family: var(--font-display);
+  font-size: var(--text-lg);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-primary);
+  margin-bottom: var(--space-3);
+}
+
+.feature-card__text {
+  font-size: var(--text-sm);
+  color: var(--color-text-secondary);
+  line-height: var(--line-height-relaxed);
+}
+
+/* Light theme cards */
+.section--light .feature-card {
+  background: rgba(0, 0, 0, 0.03);
+  border-color: rgba(0, 0, 0, 0.08);
+}
+
+.section--light .feature-card:hover {
+  background: rgba(0, 0, 0, 0.05);
+  border-color: rgba(0, 0, 0, 0.12);
+}
+
+.section--light .feature-card__title {
+  color: var(--color-bg-primary);
+}
+
+.section--light .feature-card__text {
+  color: rgba(5, 5, 5, 0.6);
+}
+
+/* ============================================
+   35. SECTION EYEBROW
+   ============================================ */
+.section__eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-3);
+  font-family: var(--font-display);
+  font-size: var(--text-xs);
+  font-weight: var(--font-weight-medium);
+  letter-spacing: var(--letter-spacing-wider);
+  text-transform: uppercase;
+  color: var(--color-accent-warm);
+  margin-bottom: var(--space-6);
+}
+
+.section__eyebrow::before {
+  content: '';
+  display: block;
+  width: 32px;
+  height: 1px;
+  background: linear-gradient(90deg, var(--color-accent-warm), transparent);
+}
+
+.section--light .section__eyebrow {
+  color: rgba(5, 5, 5, 0.6);
+}
+
+.section--light .section__eyebrow::before {
+  background: linear-gradient(90deg, rgba(5, 5, 5, 0.4), transparent);
+}
+
