@@ -852,3 +852,535 @@ body {
     opacity: 0.5;
   }
 }
+
+/* ============================================
+   AETHER — PART 2: LAYOUT & NAVIGATION SYSTEM
+   Appended to Part 1 style.css
+   ============================================ */
+
+/* ============================================
+   16. SKIP NAVIGATION (Accessibility)
+   ============================================ */
+.skip-nav {
+  position: absolute;
+  top: -100%;
+  left: var(--container-padding);
+  z-index: calc(var(--z-header) + 10);
+  padding: var(--space-3) var(--space-6);
+  background: var(--color-text-primary);
+  color: var(--color-bg-primary);
+  font-family: var(--font-primary);
+  font-size: var(--text-sm);
+  font-weight: var(--font-weight-medium);
+  border-radius: var(--radius-md);
+  text-decoration: none;
+  transition: top var(--transition-fast);
+}
+
+.skip-nav:focus {
+  top: var(--space-4);
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+}
+
+/* ============================================
+   17. LAYOUT UTILITIES
+   ============================================ */
+.layout-initialized {
+  /* Marker class set by JS when layout is ready */
+}
+
+/* Body state classes */
+body.nav-drawer-open {
+  overflow: hidden;
+}
+
+/* ============================================
+   18. HEADER STATES (Sticky / Hidden)
+   ============================================ */
+.site-header {
+  transition: transform var(--transition-smooth), 
+              background-color var(--transition-base),
+              backdrop-filter var(--transition-base);
+}
+
+.site-header--sticky {
+  background-color: rgba(5, 5, 5, 0.75);
+  backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
+  -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
+  border-bottom: 1px solid var(--glass-border);
+}
+
+.site-header--hidden {
+  transform: translateY(-100%);
+}
+
+.site-header--visible {
+  transform: translateY(0);
+}
+
+/* ============================================
+   19. NAVIGATION DRAWER (Mobile)
+   ============================================ */
+.site-nav__links {
+  transition: transform var(--transition-smooth), opacity var(--transition-smooth);
+}
+
+.site-nav__links--open {
+  transform: translateX(0);
+  opacity: 1;
+  visibility: visible;
+}
+
+@media (max-width: 768px) {
+  .site-nav__links {
+    position: fixed;
+    top: var(--header-height-mobile);
+    left: 0;
+    right: 0;
+    bottom: 0;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0;
+    padding: var(--space-8) var(--container-padding);
+    background-color: rgba(5, 5, 5, 0.97);
+    backdrop-filter: blur(40px) saturate(180%);
+    -webkit-backdrop-filter: blur(40px) saturate(180%);
+    transform: translateX(100%);
+    opacity: 0;
+    visibility: hidden;
+    overflow-y: auto;
+    z-index: calc(var(--z-header) - 1);
+  }
+  
+  .site-nav__links--open {
+    transform: translateX(0);
+  }
+  
+  .site-nav__link {
+    font-family: var(--font-display);
+    font-size: var(--text-xl);
+    font-weight: var(--font-weight-light);
+    padding: var(--space-5) 0;
+    width: 100%;
+    border-bottom: 1px solid var(--color-border);
+    color: var(--color-text-secondary);
+    transition: color var(--transition-fast), padding-left var(--transition-base);
+  }
+  
+  .site-nav__link:hover,
+  .site-nav__link:focus-visible {
+    color: var(--color-text-primary);
+    padding-left: var(--space-4);
+  }
+  
+  .site-nav__link--active {
+    color: var(--color-text-primary);
+  }
+  
+  .site-nav__link--active::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 3px;
+    height: 24px;
+    background: linear-gradient(180deg, var(--color-accent-warm), var(--color-accent-cool));
+    border-radius: var(--radius-full);
+  }
+}
+
+/* ============================================
+   20. DESKTOP NAVIGATION ACTIVE STATES
+   ============================================ */
+@media (min-width: 769px) {
+  .site-nav__link--active {
+    color: var(--color-text-primary);
+  }
+  
+  .site-nav__link--active::after {
+    width: 100% !important;
+    background: linear-gradient(90deg, var(--color-accent-warm), var(--color-accent-cool));
+  }
+}
+
+/* ============================================
+   21. NAVIGATION ANIMATIONS
+   ============================================ */
+@keyframes navLinkFadeIn {
+  from {
+    opacity: 0;
+    transform: translateX(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.site-nav__links--open .site-nav__link {
+  animation: navLinkFadeIn 0.4s var(--transition-smooth) forwards;
+  opacity: 0;
+}
+
+.site-nav__links--open .site-nav__link:nth-child(1) { animation-delay: 0.05s; }
+.site-nav__links--open .site-nav__link:nth-child(2) { animation-delay: 0.1s; }
+.site-nav__links--open .site-nav__link:nth-child(3) { animation-delay: 0.15s; }
+.site-nav__links--open .site-nav__link:nth-child(4) { animation-delay: 0.2s; }
+.site-nav__links--open .site-nav__link:nth-child(5) { animation-delay: 0.25s; }
+
+/* ============================================
+   22. CONTAINER SYSTEM
+   ============================================ */
+.container {
+  width: 100%;
+  max-width: var(--container-max);
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: var(--container-padding);
+  padding-right: var(--container-padding);
+}
+
+.container--narrow {
+  max-width: 960px;
+}
+
+.container--wide {
+  max-width: 1600px;
+}
+
+.container--full {
+  max-width: none;
+  padding-left: 0;
+  padding-right: 0;
+}
+
+/* ============================================
+   23. GRID SYSTEM
+   ============================================ */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(var(--grid-columns, 12), 1fr);
+  gap: var(--grid-gap, var(--space-6));
+}
+
+.grid__item {
+  grid-column: span var(--grid-span, 12);
+}
+
+/* Responsive grid spans */
+@media (min-width: 640px) {
+  .grid__item {
+    grid-column: span var(--grid-span-sm, var(--grid-span, 12));
+  }
+}
+
+@media (min-width: 768px) {
+  .grid__item {
+    grid-column: span var(--grid-span-md, var(--grid-span-sm, var(--grid-span, 12)));
+  }
+}
+
+@media (min-width: 1024px) {
+  .grid__item {
+    grid-column: span var(--grid-span-lg, var(--grid-span-md, var(--grid-span-sm, var(--grid-span, 12))));
+  }
+}
+
+@media (min-width: 1280px) {
+  .grid__item {
+    grid-column: span var(--grid-span-xl, var(--grid-span-lg, var(--grid-span-md, var(--grid-span-sm, var(--grid-span, 12)))));
+  }
+}
+
+/* Grid offsets */
+.grid__item[style*="--grid-offset"] {
+  grid-column-start: calc(var(--grid-offset) + 1);
+}
+
+/* ============================================
+   24. SECTION SYSTEM
+   ============================================ */
+.section {
+  position: relative;
+  width: 100%;
+}
+
+.section--full-height {
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  align-items: center;
+}
+
+.section--light {
+  background-color: var(--color-accent);
+  color: var(--color-bg-primary);
+}
+
+.section--light .section__title {
+  color: var(--color-bg-primary);
+}
+
+.section--light .section__text {
+  color: rgba(5, 5, 5, 0.7);
+}
+
+.section--accent {
+  background: linear-gradient(135deg, var(--color-accent-warm), var(--color-accent-cool));
+  color: var(--color-bg-primary);
+}
+
+/* Section reveal animations */
+.is-hidden {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.8s var(--transition-smooth), transform 0.8s var(--transition-smooth);
+}
+
+.is-revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Stagger children */
+[data-reveal] > * {
+  transition-delay: calc(var(--child-index, 0) * 0.1s);
+}
+
+/* ============================================
+   25. SPACING UTILITIES
+   ============================================ */
+/* Margin utilities */
+.mt-0 { margin-top: 0; }
+.mt-1 { margin-top: var(--space-1); }
+.mt-2 { margin-top: var(--space-2); }
+.mt-3 { margin-top: var(--space-3); }
+.mt-4 { margin-top: var(--space-4); }
+.mt-6 { margin-top: var(--space-6); }
+.mt-8 { margin-top: var(--space-8); }
+.mt-12 { margin-top: var(--space-12); }
+.mt-16 { margin-top: var(--space-16); }
+.mt-20 { margin-top: var(--space-20); }
+.mt-24 { margin-top: var(--space-24); }
+.mt-32 { margin-top: var(--space-32); }
+
+.mb-0 { margin-bottom: 0; }
+.mb-1 { margin-bottom: var(--space-1); }
+.mb-2 { margin-bottom: var(--space-2); }
+.mb-3 { margin-bottom: var(--space-3); }
+.mb-4 { margin-bottom: var(--space-4); }
+.mb-6 { margin-bottom: var(--space-6); }
+.mb-8 { margin-bottom: var(--space-8); }
+.mb-12 { margin-bottom: var(--space-12); }
+.mb-16 { margin-bottom: var(--space-16); }
+.mb-20 { margin-bottom: var(--space-20); }
+.mb-24 { margin-bottom: var(--space-24); }
+.mb-32 { margin-bottom: var(--space-32); }
+
+/* Padding utilities */
+.py-0 { padding-top: 0; padding-bottom: 0; }
+.py-4 { padding-top: var(--space-4); padding-bottom: var(--space-4); }
+.py-8 { padding-top: var(--space-8); padding-bottom: var(--space-8); }
+.py-12 { padding-top: var(--space-12); padding-bottom: var(--space-12); }
+.py-16 { padding-top: var(--space-16); padding-bottom: var(--space-16); }
+.py-20 { padding-top: var(--space-20); padding-bottom: var(--space-20); }
+.py-24 { padding-top: var(--space-24); padding-bottom: var(--space-24); }
+.py-32 { padding-top: var(--space-32); padding-bottom: var(--space-32); }
+
+.px-0 { padding-left: 0; padding-right: 0; }
+.px-4 { padding-left: var(--space-4); padding-right: var(--space-4); }
+
+/* ============================================
+   26. RESPONSIVE BREAKPOINT HELPERS
+   ============================================ */
+/* Hide/show utilities */
+.hide-mobile { display: none; }
+@media (min-width: 768px) {
+  .hide-mobile { display: initial; }
+  .hide-desktop { display: none; }
+}
+
+/* Text alignment */
+.text-center { text-align: center; }
+.text-left { text-align: left; }
+.text-right { text-align: right; }
+
+@media (min-width: 768px) {
+  .md\:text-center { text-align: center; }
+  .md\:text-left { text-align: left; }
+  .md\:text-right { text-align: right; }
+}
+
+@media (min-width: 1024px) {
+  .lg\:text-center { text-align: center; }
+  .lg\:text-left { text-align: left; }
+  .lg\:text-right { text-align: right; }
+}
+
+/* ============================================
+   27. SMOOTH ANCHOR NAVIGATION
+   ============================================ */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Respect reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  
+  .is-hidden,
+  .is-revealed {
+    transition: none;
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* ============================================
+   28. FOCUS MANAGEMENT
+   ============================================ */
+:focus-visible {
+  outline: 2px solid var(--color-accent-warm);
+  outline-offset: 2px;
+  border-radius: var(--radius-sm);
+}
+
+/* Remove default focus for mouse users */
+:focus:not(:focus-visible) {
+  outline: none;
+}
+
+/* ============================================
+   29. FOOTER STYLES (Enhanced)
+   ============================================ */
+.site-footer__inner {
+  padding-top: var(--space-16);
+  padding-bottom: var(--space-12);
+}
+
+.site-footer__content {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-12);
+  margin-bottom: var(--space-12);
+  padding-bottom: var(--space-12);
+  border-bottom: 1px solid var(--color-border);
+}
+
+@media (min-width: 768px) {
+  .site-footer__content {
+    grid-template-columns: 2fr 1fr 1fr;
+    align-items: start;
+  }
+}
+
+.site-footer__nav {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.site-footer__links {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.site-footer__link {
+  font-size: var(--text-sm);
+  color: var(--color-text-secondary);
+  transition: color var(--transition-fast);
+}
+
+.site-footer__link:hover {
+  color: var(--color-text-primary);
+}
+
+.site-footer__social {
+  display: flex;
+  gap: var(--space-4);
+}
+
+.site-footer__social-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: var(--radius-full);
+  border: 1px solid var(--color-border);
+  color: var(--color-text-secondary);
+  transition: all var(--transition-fast);
+}
+
+.site-footer__social-link:hover {
+  border-color: var(--color-border-hover);
+  color: var(--color-text-primary);
+  background: var(--glass-bg-hover);
+}
+
+/* ============================================
+   30. KEYBOARD NAVIGATION INDICATORS
+   ============================================ */
+.site-nav__link:focus-visible,
+.btn:focus-visible,
+.site-footer__link:focus-visible,
+.site-footer__social-link:focus-visible {
+  outline: 2px solid var(--color-accent-warm);
+  outline-offset: 2px;
+}
+
+/* ============================================
+   31. THEME INTEGRATION
+   ============================================ */
+[data-theme="light"] {
+  --color-bg-primary: #f5f5f0;
+  --color-bg-secondary: #ffffff;
+  --color-text-primary: #0a0a0a;
+  --color-text-secondary: rgba(10, 10, 10, 0.7);
+  --color-border: rgba(0, 0, 0, 0.08);
+}
+
+/* ============================================
+   32. ACCESSIBILITY: SCREEN READER ONLY
+   ============================================ */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* ============================================
+   33. PRINT STYLES
+   ============================================ */
+@media print {
+  .site-header,
+  .hero__canvas-container,
+  .hero__background,
+  .hero__scroll-indicator,
+  .site-nav__toggle,
+  .loading-screen {
+    display: none !important;
+  }
+  
+  .hero {
+    min-height: auto;
+    padding: 2rem 0;
+  }
+  
+  body {
+    background: white;
+    color: black;
+  }
+}
+
