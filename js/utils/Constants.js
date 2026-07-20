@@ -45,6 +45,15 @@ export const Constants = Object.freeze({
     SECTION_LEAVE: 'layout:sectionleave',
     ELEMENT_REVEAL: 'layout:elementreveal',
     PARALLAX_UPDATE: 'layout:parallaxupdate',
+        // ── Part 3: Motion & Interaction ─────────
+    MOUSE_MOVE_SMOOTH: 'input:mousemove:smooth',
+    HOVER_START: 'interaction:hoverstart',
+    HOVER_END: 'interaction:hoverend',
+    SCROLL_PROGRESS: 'scroll:progress',
+    SCENE_STATE_CHANGE: 'scene:statechange',
+    PARALLAX_UPDATE: 'layout:parallaxupdate',
+    CAMERA_UPDATE: 'camera:update',
+
   }),
 
   // ── CSS Selectors ──────────────────────────
