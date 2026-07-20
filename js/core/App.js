@@ -21,6 +21,9 @@ import { Constants } from '../utils/Constants.js';
 import { LayoutSystem } from '../modules/LayoutSystem.js';
 import { NavigationSystem } from '../modules/NavigationSystem.js';
 import { ScrollSystem } from '../modules/ScrollSystem.js';
+import { MotionSystem } from '../modules/MotionSystem.js';
+import { ScrollEngine } from '../modules/ScrollEngine.js';
+import { MouseInteraction } from '../modules/MouseInteraction.js';
 
 
 export class App {
@@ -110,6 +113,33 @@ export class App {
       });
       this.registerModule('scroll', scrollSystem);
       scrollSystem.init();
+            // 5e. Initialize Motion System (Part 3A)
+      const motionSystem = new MotionSystem({
+        eventBus: this.eventBus,
+        device: this.device,
+      });
+      this.registerModule('motion', motionSystem);
+      motionSystem.init();
+
+      // 5f. Initialize Mouse Interaction (Part 3A)
+      const mouseInteraction = new MouseInteraction({
+        eventBus: this.eventBus,
+        motionSystem,
+        device: this.device,
+      });
+      this.registerModule('mouse', mouseInteraction);
+      mouseInteraction.init();
+
+      // 5g. Initialize Scroll Engine (Part 3A)
+      const scrollEngine = new ScrollEngine({
+        eventBus: this.eventBus,
+        motionSystem,
+        layoutSystem,
+        device: this.device,
+      });
+      this.registerModule('scrollEngine', scrollEngine);
+      scrollEngine.init();
+
 
 
       // 6. Initialize Three.js core (interdependent)
@@ -252,11 +282,11 @@ export class App {
 
     // Dispose modules in reverse order
     const disposeOrder = [
-      'scroll', 'navigation', 'layout', // Part 2 modules first
+      'scrollEngine', 'mouse', 'motion', // Part 3A
+      'scroll', 'navigation', 'layout',  // Part 2
       'animation', 'resize', 'renderer', 'camera',
       'scene', 'ui', 'assetLoader', 'loading'
     ];
-
     
     for (const name of disposeOrder) {
       const module = this.modules.get(name);
